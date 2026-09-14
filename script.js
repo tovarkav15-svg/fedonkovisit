@@ -29,11 +29,33 @@ profile.addEventListener('pointermove', event => {
   profile.style.setProperty('--light-y', (event.clientY-box.top)/box.height*100+'%');
 });
 
-if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const chapterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); chapterObserver.unobserve(entry.target); }
-    });
-  }, {threshold: .12});
-  document.querySelectorAll('.chapter').forEach(chapter => {chapter.classList.add('is-revealing'); chapterObserver.observe(chapter);});
+const chapters = [...document.querySelectorAll('.chapter')];
+const chapterNav = document.querySelector('.journey-tabs');
+const chapterControls = document.querySelector('.journey-controls');
+let activeChapter = 0;
+const chapterButtons = chapters.map((chapter, index) => {
+  const button = document.createElement('button');
+  button.type = 'button'; button.textContent = chapter.querySelector('h3').textContent;
+  button.id = `chapter-tab-${index}`; button.setAttribute('role', 'tab');
+  chapter.id = `chapter-${index}`; chapter.setAttribute('role', 'tabpanel');
+  chapter.setAttribute('aria-labelledby', button.id);
+  button.setAttribute('aria-controls', chapter.id);
+  button.addEventListener('click', () => selectChapter(index));
+  button.addEventListener('keydown', event => {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % chapters.length;
+    if (event.key === 'ArrowLeft') next = (index + chapters.length - 1) % chapters.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = chapters.length - 1;
+    if (next !== undefined) {event.preventDefault(); selectChapter(next); chapterButtons[next].focus();}
+  });
+  chapterNav.append(button); return button;
+});
+function selectChapter(index) {
+  activeChapter = index;
+  chapters.forEach((chapter, i) => {chapter.hidden = i !== index; chapter.classList.toggle('is-active', i === index); chapterButtons[i].setAttribute('aria-selected', String(i === index)); chapterButtons[i].tabIndex = i === index ? 0 : -1;});
+  document.querySelector('.journey-count').textContent = `0${index + 1} / 05`;
 }
+chapterNav.setAttribute('role', 'tablist'); chapterNav.hidden = false; chapterControls.hidden = false;
+document.querySelector('.journey-next').addEventListener('click', () => selectChapter((activeChapter + 1) % chapters.length));
+selectChapter(0);
