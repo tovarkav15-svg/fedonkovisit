@@ -28,3 +28,12 @@ profile.addEventListener('pointermove', event => {
   profile.style.setProperty('--light-x', (event.clientX-box.left)/box.width*100+'%');
   profile.style.setProperty('--light-y', (event.clientY-box.top)/box.height*100+'%');
 });
+
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const chapterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); chapterObserver.unobserve(entry.target); }
+    });
+  }, {threshold: .12});
+  document.querySelectorAll('.chapter').forEach(chapter => {chapter.classList.add('is-revealing'); chapterObserver.observe(chapter);});
+}
