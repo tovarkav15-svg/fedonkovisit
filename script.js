@@ -33,6 +33,15 @@ const chapters = [...document.querySelectorAll('.chapter')];
 const chapterNav = document.querySelector('.journey-tabs');
 const chapterControls = document.querySelector('.journey-controls');
 let activeChapter = 0;
+const tabIndicator = document.createElement('span');
+tabIndicator.className = 'journey-tab-indicator'; tabIndicator.setAttribute('aria-hidden', 'true');
+chapterNav.append(tabIndicator);
+function positionChapterIndicator() {
+ const button = chapterButtons[activeChapter];
+ chapterNav.style.setProperty('--tab-left', button.offsetLeft + 'px');
+ chapterNav.style.setProperty('--tab-width', button.offsetWidth + 'px');
+}
+
 const chapterButtons = chapters.map((chapter, index) => {
   const button = document.createElement('button');
   button.type = 'button'; button.textContent = chapter.querySelector('h3').textContent;
@@ -53,9 +62,13 @@ const chapterButtons = chapters.map((chapter, index) => {
 });
 function selectChapter(index) {
   activeChapter = index;
+  requestAnimationFrame(positionChapterIndicator);
   chapters.forEach((chapter, i) => {chapter.hidden = i !== index; chapter.classList.toggle('is-active', i === index); chapterButtons[i].setAttribute('aria-selected', String(i === index)); chapterButtons[i].tabIndex = i === index ? 0 : -1;});
   document.querySelector('.journey-count').textContent = `0${index + 1} / 05`;
 }
 chapterNav.setAttribute('role', 'tablist'); chapterNav.hidden = false; chapterControls.hidden = false;
 document.querySelector('.journey-next').addEventListener('click', () => selectChapter((activeChapter + 1) % chapters.length));
 selectChapter(0);
+
+window.addEventListener('resize', positionChapterIndicator);
+if (document.fonts) document.fonts.ready.then(positionChapterIndicator);
