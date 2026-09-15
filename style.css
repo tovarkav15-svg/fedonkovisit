@@ -145,3 +145,12 @@ h1,h2,.service-card h3,.business-fact strong{color:#202020;background-image:line
 @media(max-width:760px){.profile-content{grid-row:1}.profile-portrait{grid-row:2}.profile-metrics{grid-template-columns:1fr 1fr;gap:22px 16px}.profile-metrics strong{font-size:28px}.profile-metrics span{font-size:12px}.profile-metrics>div:last-child{grid-column:1/-1}.profile-metrics>div:last-child span{max-width:none}.journey{margin-top:24px}}
 @media(hover:hover) and (pointer:fine){body{cursor:url('assets/cursor.svg') 4 3,auto}a,button,[role=tab]{cursor:url('assets/cursor-link.svg') 12 12,pointer}input,textarea,[contenteditable=true]{cursor:text}}
 .profile-content{padding-bottom:0}
+/* Magnetic viewfinder cursor. */
+.design-cursor{display:none;position:fixed;left:0;top:0;width:36px;height:36px;pointer-events:none;z-index:10000;opacity:0;transition:opacity .2s;width:36px}.design-cursor.is-on{opacity:1}.cursor-frame{position:absolute;inset:0;border:1px solid #60796a;border-radius:50%;transition:transform .35s,border-radius .35s,background .35s;background:#8ba5950b}.cursor-frame:before,.cursor-frame:after{content:'';position:absolute;background:#60796a;left:50%;top:50%;transform:translate(-50%,-50%)}.cursor-frame:before{width:9px;height:1px}.cursor-frame:after{width:1px;height:9px}.design-cursor.is-link .cursor-frame{transform:rotate(90deg) scale(1.35);border-radius:9px;background:#8ba59520}.design-cursor.is-down .cursor-frame{transform:scale(.7) rotate(135deg)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.design-cursor{display:block}html.has-design-cursor,html.has-design-cursor body,html.has-design-cursor a,html.has-design-cursor button,html.has-design-cursor [role=tab]{cursor:none}}
+/* Fashion archive objects, each placement has its own asset. */
+.hero-plane{background-image:url('assets/editorial-hero.png');background-size:contain;background-position:center}
+.service-card .object-plane{background-image:url('assets/editorial-service1.png');background-size:contain;background-position:center}
+.service-card .object-notebook{background-image:url('assets/editorial-service2.png');background-size:contain;background-position:center}
+.service-card .object-headset{background-image:url('assets/editorial-service3.png');background-size:contain;background-position:center}
+.journey-sculpture{background-image:url('assets/editorial-history.png');background-size:contain;background-position:center}
