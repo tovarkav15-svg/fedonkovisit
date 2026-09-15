@@ -85,3 +85,10 @@ document.addEventListener('pointermove',event=>{if(!cursorMedia.matches||event.p
 document.addEventListener('pointerdown',()=>designCursor.classList.add('is-down'));
 document.addEventListener('pointerup',()=>designCursor.classList.remove('is-down'));
 document.documentElement.addEventListener('pointerleave',hideCursor);window.addEventListener('blur',hideCursor);cursorMedia.addEventListener('change',hideCursor);
+
+if ('IntersectionObserver' in window && !motionQuery.matches) {
+  const projectObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) {entry.target.classList.add('project-visible');projectObserver.unobserve(entry.target);} });
+  }, {threshold:.08});
+  document.querySelectorAll('.project-card').forEach(card => {card.classList.add('project-reveal');projectObserver.observe(card);});
+}
