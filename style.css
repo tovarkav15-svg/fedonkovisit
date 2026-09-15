@@ -154,3 +154,7 @@ h1,h2,.service-card h3,.business-fact strong{color:#202020;background-image:line
 .service-card .object-notebook{background-image:url('assets/editorial-service2.png');background-size:contain;background-position:center}
 .service-card .object-headset{background-image:url('assets/editorial-service3.png');background-size:contain;background-position:center}
 .journey-sculpture{background-image:url('assets/editorial-history.png');background-size:contain;background-position:center}
+
+/* Genuine photographed fashion items, credited at each placement. */
+.real-fashion,.hero-plane.real-fashion,.service-card .real-fashion,.journey-sculpture.real-fashion{background:none;margin-left:0;margin-right:0;position:relative;overflow:visible}.real-fashion img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}.real-fashion figcaption{font:8px/1.45 var(--mono);letter-spacing:.1px;text-align:center;color:#888;position:absolute;top:100%;left:-15px;right:-15px;padding-top:9px}.real-fashion figcaption a:hover{color:#333}.hero-plane.real-fashion{width:100%;max-width:400px;aspect-ratio:1;height:auto}.service-card .real-fashion{margin-bottom:48px}.journey-sculpture.real-fashion{margin:0;bottom:45px}.journey-sculpture.real-fashion figcaption{font-size:7px}.hero-plane.real-fashion img{mix-blend-mode:multiply}.real-fashion figcaption{animation:none}
+.real-fashion img{position:absolute;inset:0}.real-fashion{aspect-ratio:1}.journey-sculpture.real-fashion{position:absolute}
