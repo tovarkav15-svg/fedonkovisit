@@ -171,9 +171,10 @@ h1,h2,.service-card h3,.business-fact strong{color:#202020;background-image:line
 @media(prefers-reduced-motion:reduce){.project-card.project-reveal{opacity:1;translate:none;transition:none}.agency-art img,.empire-art img,.empire-art:after,.project-avatar{animation:none}.project-bottom>span:last-child:after{display:none}}
 /* A softer finish: quiet gradients, fine borders and restrained motion. */
 .project-agency{--project-accent:#656750;--project-tint:#eeeee6;--project-button-end:#dedfd1}.project-empire{--project-accent:#725d65;--project-tint:#f2ebee;--project-button-end:#e4d8dd}.project-telegram{--project-accent:#546b60;--project-tint:#eaf0ec;--project-button-end:#d7e3dc}.project-card{border-radius:10px;border-color:#e1e1de;background:linear-gradient(155deg,var(--project-tint) -65%,#fff 48%,#fcfcfb);box-shadow:inset 0 1px 0 #fff,0 3px 12px #00000003}.project-card:hover{transform:translateY(-3px);box-shadow:0 9px 22px #00000007;border-color:#c9cbc6}.project-art{border-radius:6px}.project-top>span:first-child:before{opacity:.55}.project-arrow{width:29px;height:29px;font-size:19px;border-color:#dededb;color:#777}.project-card:hover .project-arrow{transform:translate(2px,-2px);background:var(--project-tint);border-color:#d3d5cf;color:var(--project-accent)}.project-bottom{gap:10px;margin-top:23px}.project-bottom>span:last-child{min-height:46px;padding:13px 16px;color:var(--project-accent);background:linear-gradient(120deg,var(--project-tint),var(--project-button-end));border:1px solid #0000000c;border-radius:5px;font-size:12px;box-shadow:inset 0 1px 0 #ffffffb3;transition:filter .35s,box-shadow .35s}.project-card:hover .project-bottom>span:last-child{filter:brightness(.96);transform:none;box-shadow:inset 0 1px 0 #ffffff80,0 3px 8px #00000004}.project-bottom>span:last-child:after{display:none}.project-card:hover .project-copy h3{color:#363636}.empire-art:after{display:none}.agency-art img{animation-duration:12s}.empire-art img{animation:none}.project-avatar{animation-duration:11s}.project-card:hover .telegram-orbit{animation-duration:18s}
-/* Restore white cards; stronger diagonal colour inside artwork only. */
-.agency-art{background:linear-gradient(35deg,#f4f4e9 8%,#e4e9b9 50%,#bdd16f 100%)}
-.telegram-art{background:linear-gradient(35deg,#eef4ef 5%,#d1e9d5 52%,#8ecda3 100%)}
-.empire-art{background:linear-gradient(35deg,#23131e,#5d294c 60%,#a55284)}
-.empire-art:after{display:block;content:'';position:absolute;inset:0;width:auto;height:auto;border:0;border-radius:0;box-shadow:none;background:linear-gradient(35deg,transparent 15%,#9b30651a 48%,#e878b45c 100%);mix-blend-mode:screen;animation:none;pointer-events:none;transform:none;opacity:1}
+/* Subtle cover gradients. */
+.agency-art{background:linear-gradient(35deg,#f6f6f0 8%,#f0f1e4 55%,#e6e9cf 100%)}
+.telegram-art{background:linear-gradient(35deg,#f1f5f2 5%,#eaf1ec 55%,#dcebe0 100%)}
+.empire-art{background:linear-gradient(35deg,#100d0f,#23151e)}
+.empire-art:after{display:none}
+.empire-art img{width:100%;height:auto;max-height:100%;object-fit:contain}
 .project-art{isolation:isolate}.agency-art img{position:relative;z-index:1}.telegram-art .project-avatar{z-index:1}
