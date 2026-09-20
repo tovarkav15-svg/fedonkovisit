@@ -92,3 +92,30 @@ if ('IntersectionObserver' in window && !motionQuery.matches) {
   }, {threshold:.08});
   document.querySelectorAll('.project-card').forEach(card => {card.classList.add('project-reveal');projectObserver.observe(card);});
 }
+
+// Animate both directions while retaining native details semantics without JS.
+const faqItems = [...document.querySelectorAll('.faq-item')];
+const faqAnimations = new WeakMap();
+function setFaq(item, expanded) {
+  const from = item.getBoundingClientRect().height;
+  faqAnimations.get(item)?.cancel();
+  const summary = item.querySelector('summary');
+  item.dataset.expanded = String(expanded);
+  item.open = true;
+  const to = expanded ? summary.getBoundingClientRect().height + item.querySelector('.faq-answer').getBoundingClientRect().height + 1 : summary.getBoundingClientRect().height + 1;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { item.open = expanded; return; }
+  item.style.overflow = 'hidden';
+  const animation = item.animate([{height:from+'px'},{height:to+'px'}], {duration:360,easing:'cubic-bezier(.22,.8,.25,1)'});
+  faqAnimations.set(item, animation);
+  animation.onfinish = () => {item.open = expanded; item.style.overflow = ''; faqAnimations.delete(item);};
+}
+faqItems.forEach(item => {
+  item.removeAttribute('name');
+  item.dataset.expanded = String(item.open);
+  item.querySelector('summary').addEventListener('click', event => {
+    event.preventDefault();
+    const expanded = item.dataset.expanded !== 'true';
+    if (expanded) faqItems.filter(other => other !== item && other.dataset.expanded === 'true').forEach(other => setFaq(other, false));
+    setFaq(item, expanded);
+  });
+});
