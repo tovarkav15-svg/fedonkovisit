@@ -119,3 +119,17 @@ faqItems.forEach(item => {
     setFaq(item, expanded);
   });
 });
+
+// Hover opens the full FAQ item; touch and keyboard retain click controls.
+const faqHover = matchMedia('(hover: hover) and (pointer: fine)');
+faqItems.forEach(item => {
+  item.addEventListener('pointerenter', event => {
+    if (!faqHover.matches || event.pointerType === 'touch') return;
+    faqItems.filter(other => other !== item && other.dataset.expanded === 'true').forEach(other => setFaq(other, false));
+    if (item.dataset.expanded !== 'true') setFaq(item, true);
+  });
+  item.addEventListener('pointerleave', event => {
+    if (!faqHover.matches || event.pointerType === 'touch') return;
+    if (item.dataset.expanded === 'true') setFaq(item, false);
+  });
+});
