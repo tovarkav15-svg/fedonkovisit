@@ -133,3 +133,6 @@ faqItems.forEach(item => {
     if (item.dataset.expanded === 'true') setFaq(item, false);
   });
 });
+
+// Pause the atmosphere when the page is not visible.
+document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('page-hidden',document.hidden));
